@@ -6,7 +6,101 @@
         xmlns:local="clr-namespace:LogViewer"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="15" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
+        <DockPanel Grid.Row="0">
+            <TextBlock
+        Text="로그 목록"
+        FontSize="24"
+        FontWeight="Bold"
+        DockPanel.Dock="Left" />
+
+            <StackPanel
+        Orientation="Horizontal"
+        HorizontalAlignment="Right">
+
+                <TextBlock
+    Text="검색"
+    VerticalAlignment="Center"
+    Margin="0,0,8,0" />
+
+                <TextBox
+    Width="180"
+    Height="32"
+    Margin="0,0,10,0"
+    Text="{Binding SearchText,
+        UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock
+            Text="로그 레벨"
+            VerticalAlignment="Center"
+            Margin="0,0,8,0" />
+
+                <ComboBox
+            Width="100"
+            Height="32"
+            Margin="0,0,10,0"
+            ItemsSource="{Binding LogLevels}"
+            SelectedItem="{Binding SelectedLogLevel,
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}" />
+
+                <Button
+            Content="로그 파일 열기"
+            Width="120"
+            Height="32"
+            Command="{Binding OpenFileCommand}" />
+            </StackPanel>
+        </DockPanel>
+
+        <ListView
+        Grid.Row="2"
+        ItemsSource="{Binding Logs}">
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn
+                    Header="시간"
+                    Width="170"
+                    DisplayMemberBinding="{Binding Time}" />
+
+                    <GridViewColumn
+                    Header="레벨"
+                    Width="80"
+                    DisplayMemberBinding="{Binding LogLevel}" />
+
+                    <GridViewColumn
+                    Header="메시지"
+                    Width="450"
+                    DisplayMemberBinding="{Binding Message}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel
+    Grid.Row="4"
+    Orientation="Horizontal"
+    HorizontalAlignment="Right">
+
+            <TextBlock Text="전체 " />
+
+            <TextBlock
+        Text="{Binding TotalLogCount}"
+        FontWeight="Bold" />
+
+            <TextBlock Text="건 / 표시 " />
+
+            <TextBlock
+        Text="{Binding FilteredLogCount}"
+        FontWeight="Bold" />
+
+            <TextBlock Text="건" />
+        </StackPanel>
     </Grid>
 </Window>
