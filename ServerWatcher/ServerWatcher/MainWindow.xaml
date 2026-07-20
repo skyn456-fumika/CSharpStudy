@@ -1,0 +1,329 @@
+﻿<Window x:Class="ServerWatcher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ServerWatcher"
+        Title="Server Watcher"
+        Height="600"
+        Width="900"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        >
+
+    <Window.Resources>
+        <local:StatusToBrushConverter 
+            x:Key="StatusToBrushConverter"/>
+
+        <local:StatusToBackgroundConverter
+            x:Key="StatusToBackgroundConverter" />
+    </Window.Resources>
+
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- 서버 입력 영역 -->
+        <Border
+        Grid.Row="0"
+        Padding="20"
+        BorderBrush="#CCCCCC"
+        BorderThickness="1"
+        CornerRadius="8">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock
+                    Text="서버 이름"
+                    Margin="0,0,0,5" />
+
+                    <TextBox
+                    Height="34"
+                    Text="{Binding ServerName,
+                        UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock
+                    Text="서버 URL"
+                    Margin="0,0,0,5" />
+
+                    <TextBox
+                    Height="34"
+                    Text="{Binding ServerUrl,
+                        UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <Button
+                Grid.Column="4"
+                Content="서버 추가"
+                Height="34"
+                VerticalAlignment="Bottom"
+                Command="{Binding AddServerCommand}" />
+            </Grid>
+        </Border>
+
+        <!-- 서버 관리 영역 -->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="15" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+                <!-- 제목 및 명령 버튼 -->
+            <DockPanel Grid.Row="0">
+                <TextBlock
+                Text="등록된 서버"
+                FontSize="22"
+                FontWeight="Bold"
+                DockPanel.Dock="Left" />
+
+                <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Right">
+
+                    <Button
+                    Content="전체 서버 확인"
+                    Width="120"
+                    Height="32"
+                    Margin="0,0,10,0"
+                    Command="{Binding CheckAllServersCommand}" />
+
+                    <Button
+                    Content="선택 서버 확인"
+                    Width="120"
+                    Height="32"
+                    Margin="0,0,10,0"
+                    Command="{Binding CheckServerCommand}" />
+
+                    <Button
+                    Content="선택 삭제"
+                    Width="100"
+                    Height="32"
+                    Command="{Binding DeleteServerCommand}" />
+                </StackPanel>
+            </DockPanel>
+            
+            
+
+            <!-- 자동 점검 영역 -->
+            <Border
+            Grid.Row="2"
+            Padding="12"
+            BorderBrush="#DDDDDD"
+            BorderThickness="1"
+            CornerRadius="6">
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                    Text="점검 간격(초)"
+                    VerticalAlignment="Center"
+                    Margin="0,0,8,0" />
+
+                    <TextBox
+                    Width="70"
+                    Height="30"
+                    Margin="0,0,10,0"
+                    Text="{Binding MonitoringIntervalSeconds,
+                        UpdateSourceTrigger=PropertyChanged}" />
+
+                    <Button
+                    Content="자동 점검 시작"
+                    Width="120"
+                    Height="30"
+                    Margin="0,0,10,0"
+                    Command="{Binding StartMonitoringCommand}" />
+
+                    <Button
+                    Content="자동 점검 중지"
+                    Width="120"
+                    Height="30"
+                    Command="{Binding StopMonitoringCommand}" />
+
+                    <TextBlock
+                    Text="{Binding IsMonitoring,
+                        StringFormat=실행 중: {0}}"
+                    VerticalAlignment="Center"
+                    Margin="15,0,0,0" />
+                </StackPanel>
+            </Border>
+
+            <!-- 서버 목록 -->
+            <ListView
+            Grid.Row="4"
+            ItemsSource="{Binding Servers}"
+            SelectedItem="{Binding SelectedServer, Mode=TwoWay}">
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter
+                        Property="Background"
+                        Value="{Binding StatusText,
+                            Converter={StaticResource StatusToBackgroundConverter}}" />
+
+                        <Setter Property="Padding" Value="4" />
+
+                        <Style.Triggers>
+                            <Trigger
+                            Property="IsSelected"
+                            Value="True">
+
+                                <Setter
+                                Property="BorderBrush"
+                                Value="#4A90E2" />
+
+                                <Setter
+                                Property="BorderThickness"
+                                Value="2" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn
+                        Header="서버 이름"
+                        Width="130"
+                        DisplayMemberBinding="{Binding Name}" />
+
+                        <GridViewColumn
+                        Header="URL"
+                        Width="260"
+                        DisplayMemberBinding="{Binding Url}" />
+
+                        <GridViewColumn
+                        Header="상태"
+                        Width="120">
+
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse
+                                        Width="9"
+                                        Height="9"
+                                        Margin="0,0,7,0"
+                                        VerticalAlignment="Center"
+                                        Fill="{Binding StatusText,
+                                            Converter={StaticResource StatusToBrushConverter}}" />
+
+                                        <TextBlock
+                                        Text="{Binding StatusText}"
+                                        Foreground="{Binding StatusText,
+                                            Converter={StaticResource StatusToBrushConverter}}"
+                                        FontWeight="SemiBold"
+                                        VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn
+                        Header="상태 코드"
+                        Width="80"
+                        DisplayMemberBinding="{Binding StatusCode}" />
+
+                        <GridViewColumn
+                        Header="응답 시간"
+                        Width="100"
+                        DisplayMemberBinding="{Binding ResponseTimeMs,
+                            StringFormat={}{0}ms}" />
+
+                        <GridViewColumn
+                        Header="마지막 확인"
+                        Width="150"
+                        DisplayMemberBinding="{Binding LastCheckedAt,
+                            StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" />
+
+                        <GridViewColumn
+                                    Header="오류 내용"
+                                    Width="250"
+                                    DisplayMemberBinding="{Binding ErrorMessage}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+            
+
+            <Border
+    Grid.Row="6"
+    Padding="12"
+    BorderBrush="#DDDDDD"
+    BorderThickness="1"
+    CornerRadius="6">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+            Text="선택한 서버 상태 이력"
+            FontSize="17"
+            FontWeight="SemiBold" />
+
+                    <DockPanel Grid.Row="0">
+                        <TextBlock
+        Text="선택한 서버 상태 이력"
+        FontSize="17"
+        FontWeight="SemiBold"
+        DockPanel.Dock="Left" />
+
+                        <Button
+        Content="이력 삭제"
+        Width="100"
+        Height="30"
+        HorizontalAlignment="Right"
+        Command="{Binding ClearHistoryCommand}" />
+                    </DockPanel>
+
+                    <ListView
+            Grid.Row="2"
+            ItemsSource="{Binding SelectedServer.Histories}">
+
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn
+                        Header="변경 시각"
+                        Width="170"
+                        DisplayMemberBinding="{Binding ChangedAt,
+                            StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}" />
+
+                                <GridViewColumn
+                        Header="이전 상태"
+                        Width="120"
+                        DisplayMemberBinding="{Binding PreviousStatus}" />
+
+                                <GridViewColumn
+                        Header="현재 상태"
+                        Width="120"
+                        DisplayMemberBinding="{Binding CurrentStatus}" />
+
+                                <GridViewColumn
+                        Header="변경 내용"
+                        Width="220"
+                        DisplayMemberBinding="{Binding Message}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

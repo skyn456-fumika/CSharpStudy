@@ -1,0 +1,22 @@
+# Visual Studio
+.vs/
+**/.vs/
+
+# Build output
+bin/
+obj/
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / VS Code
+.idea/
+.vscode/
+
+# Logs
+*.log
