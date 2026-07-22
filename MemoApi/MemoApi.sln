@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37502.11 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoApi", "MemoApi\MemoApi.csproj", "{FA388D9F-EB42-43F0-BEDD-E874A9848985}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA388D9F-EB42-43F0-BEDD-E874A9848985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA388D9F-EB42-43F0-BEDD-E874A9848985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA388D9F-EB42-43F0-BEDD-E874A9848985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA388D9F-EB42-43F0-BEDD-E874A9848985}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1744C302-4D62-485F-AFB7-03F64CDD9764}
+	EndGlobalSection
+EndGlobal
