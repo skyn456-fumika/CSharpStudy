@@ -43,7 +43,24 @@ builder.Services.AddDbContext<MemoDbContext>(options =>
 
 builder.Services.AddScoped<MemoService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMemoBlazor", policy =>
+    {
+        policy
+            .WithOrigins("https://localhost:7157")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
 
 app.UseExceptionHandler(exceptionHandlerApp =>
 {
@@ -76,13 +93,9 @@ app.UseExceptionHandler(exceptionHandlerApp =>
     });
 });
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
 app.UseHttpsRedirection();
+
+app.UseCors("AllowMemoBlazor");
 
 app.UseAuthorization();
 

@@ -1,36 +1,29 @@
-# MemoApi
+# CSharpStudy
 
-ASP.NET Core Web API와 Entity Framework Core를 사용한 메모 관리 API입니다.
+C#과 .NET을 학습하며 제작한 실습 프로젝트 모음입니다.
 
-## 기술 스택
+## 프로젝트
 
-- C#
-- ASP.NET Core Web API
-- Entity Framework Core
-- SQLite
-- Swagger / OpenAPI
+### WPF
 
-## 주요 기능
+- ServerWatcher
+- LogViewer
+- TaskManager
+- BudgetTracker
 
-- 메모 등록, 조회, 수정, 삭제
-- DTO 기반 입력값 검증
-- 키워드 검색
-- 카테고리 필터
-- 페이징
-- 정렬
-- EF Core Migration
+### Console / Network
 
-## API
+- TCP Chat Server
+- TCP Chat Client
 
-- GET /api/memos
-- GET /api/memos/{id}
-- POST /api/memos
-- PUT /api/memos/{id}
-- DELETE /api/memos/{id}
+### Web
 
-## 실행
+- MemoApi
+  - ASP.NET Core Web API
+  - Entity Framework Core
+  - SQLite
+- MemoBlazor
+  - Blazor WebAssembly
+  - MemoApi 연동
 
-```bash
-dotnet restore
-dotnet ef database update
-dotnet run
+각 프로젝트의 자세한 설명과 실행 방법은 프로젝트 폴더의 README를 참고하세요.
