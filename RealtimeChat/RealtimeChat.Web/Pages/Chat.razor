@@ -1,0 +1,574 @@
+﻿@page "/chat"
+@using Microsoft.AspNetCore.SignalR.Client
+@using RealtimeChat.Web.Models
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@using Microsoft.AspNetCore.Components.Web
+
+<PageTitle>실시간 채팅</PageTitle>
+
+<h1>실시간 채팅</h1>
+
+<div class="mb-3">
+    <label class="form-label">닉네임</label>
+
+    <input class="form-control"
+           @bind="nickname"
+           disabled="@IsConnected" />
+</div>
+
+<div class="mb-3">
+    <label class="form-label">채팅방</label>
+
+    <select class="form-select"
+            @bind="selectedRoom">
+        @foreach (KeyValuePair<string, string> room in rooms)
+        {
+            <option value="@room.Key">@room.Value</option>
+        }
+    </select>
+</div>
+
+<div class="mb-3">
+    <button class="btn btn-primary"
+            disabled="@(IsConnected || isConnecting)"
+            @onclick="ConnectAsync">
+        @(isConnecting ? "연결 중..." : "채팅 연결")
+    </button>
+
+    <button class="btn btn-warning ms-2"
+            disabled="@(!CanChangeRoom)"
+            @onclick="ChangeRoomAsync">
+        @(isChangingRoom ? "이동 중..." : "방 이동")
+    </button>
+
+    <button class="btn btn-outline-secondary ms-2"
+            disabled="@(!IsConnected)"
+            @onclick="DisconnectAsync">
+        연결 종료
+    </button>
+</div>
+
+<p>
+    연결 상태:
+    <strong>@connectionStatus</strong>
+</p>
+
+@if (IsConnected && rooms.TryGetValue(joinedRoom, out string? roomName))
+{
+    <p>
+        현재 채팅방:
+        <strong>@roomName</strong>
+    </p>
+}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h2 class="h5">
+            접속자 @(connectedUsers.Length)명
+        </h2>
+
+        @if (connectedUsers.Length == 0)
+        {
+            <p class="text-muted mb-0">접속자가 없습니다.</p>
+        }
+        else
+        {
+            <div class="list-group">
+                @foreach (string user in connectedUsers)
+                {
+                    <button type="button"
+                            class="list-group-item list-group-item-action"
+                            @onclick="() => whisperTarget = user">
+                        @user
+                    </button>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
+<div class="card mb-3">
+    <div class="card-body"
+         @ref="messageContainer"
+         style="height: 350px; overflow-y: auto;">
+        @if (messages.Count == 0)
+        {
+            <p class="text-muted">아직 메시지가 없습니다.</p>
+        }
+        else
+        {
+            @foreach (ChatMessage chatMessage in messages)
+            {
+                @if (chatMessage.IsSystem)
+                {
+                    <div class="alert alert-secondary py-2 mb-2">
+                        @chatMessage.Message
+                    </div>
+                }
+                else if (chatMessage.IsWhisper)
+                {
+                    <div class="alert alert-info py-2 mb-2">
+                        <strong>
+                            @(chatMessage.IsSentWhisper
+                                            ? $"나 → {chatMessage.Nickname}"
+                                            : $"{chatMessage.Nickname} → 나")
+                        </strong>
+
+                        <span class="text-muted ms-2">
+                            @chatMessage.SentAt.ToLocalTime().ToString("HH:mm:ss")
+                        </span>
+
+                        <div>@chatMessage.Message</div>
+                    </div>
+                }
+                else
+                {
+                    <div class="mb-2">
+                        <strong>@chatMessage.Nickname</strong>
+
+                        <span class="text-muted ms-2">
+                            @chatMessage.SentAt.ToLocalTime().ToString("HH:mm:ss")
+                        </span>
+
+                        <div>@chatMessage.Message</div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
+
+<div class="input-group">
+    <input class="form-control"
+           placeholder="메시지를 입력하세요."
+           @bind="message"
+           @bind:event="oninput"
+           @onkeydown="HandleMessageKeyDownAsync"
+           disabled="@(!IsConnected)" />
+
+    <button class="btn btn-success"
+            disabled="@(!CanSend)"
+            @onclick="SendMessageAsync">
+        @(isSending ? "전송 중..." : "전송")
+    </button>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h2 class="h5">귓속말</h2>
+
+        <div class="mb-2">
+            <label class="form-label">받는 사람</label>
+
+            <input class="form-control"
+                   value="@whisperTarget"
+                   readonly />
+        </div>
+
+        <div class="input-group">
+            <input class="form-control"
+                   placeholder="귓속말을 입력하세요."
+                   @bind="whisperMessage"
+                   @bind:event="oninput"
+                   @onkeydown="HandleWhisperKeyDownAsync"
+                   disabled="@(!IsConnected)" />
+
+            <button class="btn btn-info"
+                    disabled="@(!CanSendWhisper)"
+                    @onclick="SendWhisperAsync">
+                @(isSendingWhisper ? "전송 중..." : "귓속말 전송")
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    private HubConnection? hubConnection;
+
+    private readonly List<ChatMessage> messages = [];
+
+    private string nickname = "";
+    private string message = "";
+    private string connectionStatus = "연결 안 됨";
+    private string errorMessage = "";
+
+    private bool isConnecting;
+
+    private bool IsConnected =>
+        hubConnection?.State == HubConnectionState.Connected;
+
+    private bool isSending;
+
+    private bool CanSend =>
+        IsConnected &&
+        !isSending &&
+        !string.IsNullOrWhiteSpace(message);
+
+    private string[] connectedUsers = [];
+
+    private readonly Dictionary<string, string> rooms = new()
+    {
+        ["general"] = "일반",
+        ["game"] = "게임",
+        ["free"] = "잡담"
+    };
+
+    private string selectedRoom = "general";
+
+    private string joinedRoom = "";
+    
+    private bool isChangingRoom;
+
+    private bool CanChangeRoom =>
+        IsConnected &&
+        !isChangingRoom &&
+        !string.IsNullOrWhiteSpace(joinedRoom) &&
+        selectedRoom != joinedRoom;
+
+    private string whisperTarget = "";
+    private string whisperMessage = "";
+
+    private bool isSendingWhisper;
+
+    private bool CanSendWhisper =>
+        IsConnected &&
+        !isSendingWhisper &&
+        !string.IsNullOrWhiteSpace(whisperTarget) &&
+        !string.IsNullOrWhiteSpace(whisperMessage);
+
+    private ElementReference messageContainer;
+
+    private async Task ConnectAsync()
+    {
+        if (string.IsNullOrWhiteSpace(nickname))
+        {
+            errorMessage = "닉네임을 입력해야 합니다.";
+            return;
+        }
+
+        try
+        {
+            isConnecting = true;
+            errorMessage = "";
+            connectionStatus = "연결 중";
+
+            hubConnection = new HubConnectionBuilder()
+                .WithUrl("https://localhost:7178/chatHub")
+                .WithAutomaticReconnect()
+                .Build();
+
+            hubConnection.On<string, string, DateTime>(
+                "ReceiveMessage",
+                (receivedNickname, receivedMessage, sentAt) =>
+                {
+                    messages.Add(new ChatMessage
+                    {
+                        Nickname = receivedNickname,
+                        Message = receivedMessage,
+                        SentAt = sentAt
+                    });
+
+                    _ = ScrollToBottomAsync();
+                });
+
+            hubConnection.On<string>(
+                "ReceiveSystemMessage",
+                systemMessage =>
+                {
+                    messages.Add(new ChatMessage
+                    {
+                        Message = systemMessage,
+                        SentAt = DateTime.UtcNow,
+                        IsSystem = true
+                    });
+
+                    _ = ScrollToBottomAsync();
+                });
+
+            hubConnection.On<string[]>(
+                "ReceiveUsers",
+                users =>
+                {
+                    connectedUsers = users;
+                    _ = InvokeAsync(StateHasChanged);
+                });
+
+            hubConnection.On<string, string, DateTime, bool>(
+                "ReceiveWhisper",
+                (otherNickname, receivedMessage, sentAt, isSent) =>
+                {
+                    messages.Add(new ChatMessage
+                    {
+                        Nickname = otherNickname,
+                        Message = receivedMessage,
+                        SentAt = sentAt,
+                        IsWhisper = true,
+                        IsSentWhisper = isSent
+                    });
+
+                    _ = ScrollToBottomAsync();
+                });
+
+            hubConnection.On<ChatMessageRecord[]>(
+                "ReceiveRoomHistory",
+                history =>
+                {
+                    messages.Clear();
+
+                    foreach (ChatMessageRecord item in history)
+                    {
+                        messages.Add(new ChatMessage
+                        {
+                            Nickname = item.Nickname,
+                            Message = item.Message,
+                            SentAt = item.SentAt
+                        });
+                    }
+
+                    _ = ScrollToBottomAsync();
+                });
+
+            hubConnection.Reconnecting += exception =>
+            {
+                connectionStatus = "재연결 중";
+                errorMessage = exception?.Message ?? "";
+
+                return InvokeAsync(StateHasChanged);
+            };
+
+            hubConnection.Reconnected += async connectionId =>
+{
+                connectionStatus = "연결됨";
+                errorMessage = "";
+
+                try
+                {
+                    if (hubConnection != null)
+                    {
+                        await hubConnection.InvokeAsync(
+                            "Join",
+                            nickname.Trim(),
+                            joinedRoom);
+
+                        selectedRoom = joinedRoom;
+                    }
+                }
+                catch (Exception exception)
+                {
+                    errorMessage = $"채팅방 재입장에 실패했습니다: {exception.Message}";
+                }
+
+                await InvokeAsync(StateHasChanged);
+            };
+
+            hubConnection.Closed += exception =>
+            {
+                connectionStatus = "연결 종료됨";
+                connectedUsers = [];
+                joinedRoom = "";
+                whisperTarget = "";
+                whisperMessage = "";
+
+                if (exception != null)
+                {
+                    errorMessage = exception.Message;
+                }
+
+                return InvokeAsync(StateHasChanged);
+            };
+
+            await hubConnection.StartAsync();
+
+            await hubConnection.InvokeAsync(
+                "Join",
+                nickname.Trim(),
+                selectedRoom);
+
+            joinedRoom = selectedRoom;
+            connectionStatus = "연결됨";
+        }
+        catch (Exception exception)
+        {
+            connectionStatus = "연결 실패";
+            errorMessage = exception.Message;
+
+            if (hubConnection != null)
+            {
+                await hubConnection.DisposeAsync();
+                hubConnection = null;
+            }
+
+            connectedUsers = [];
+            joinedRoom = "";
+        }
+        finally
+        {
+            isConnecting = false;
+        }
+    }
+
+    private async Task SendMessageAsync()
+    {
+        if (!CanSend || hubConnection == null)
+        {
+            return;
+        }
+
+        try
+        {
+            isSending = true;
+            errorMessage = "";
+
+            string messageToSend = message.Trim();
+            message = "";
+
+            await hubConnection.InvokeAsync(
+                "SendMessage",
+                messageToSend);
+        }
+        catch (Exception exception)
+        {
+            errorMessage =
+                $"메시지 전송에 실패했습니다: {exception.Message}";
+        }
+        finally
+        {
+            isSending = false;
+        }
+    }
+
+    private async Task DisconnectAsync()
+    {
+        if (hubConnection == null)
+        {
+            return;
+        }
+
+        await hubConnection.StopAsync();
+        await hubConnection.DisposeAsync();
+
+        hubConnection = null;
+        connectedUsers = [];
+        joinedRoom = "";
+        whisperTarget = "";
+        whisperMessage = "";
+        connectionStatus = "연결 안 됨";
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection != null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+
+    private async Task ChangeRoomAsync()
+    {
+        if (!CanChangeRoom || hubConnection == null)
+        {
+            return;
+        }
+
+        string previousRoom = joinedRoom;
+
+        try
+        {
+            isChangingRoom = true;
+            errorMessage = "";
+
+            // 서버 요청 전에 기존 방의 화면 상태를 초기화한다.
+            messages.Clear();
+            connectedUsers = [];
+            whisperTarget = "";
+            whisperMessage = "";
+
+            await hubConnection.InvokeAsync(
+                "ChangeRoom",
+                selectedRoom);
+
+            // InvokeAsync 이후에는 messages와 connectedUsers를 지우면 안 된다.
+            joinedRoom = selectedRoom;
+
+            await InvokeAsync(StateHasChanged);
+            await ScrollToBottomAsync();
+        }
+        catch (Exception exception)
+        {
+            errorMessage =
+                $"채팅방 이동에 실패했습니다: {exception.Message}";
+
+            selectedRoom = previousRoom;
+            joinedRoom = previousRoom;
+        }
+        finally
+        {
+            isChangingRoom = false;
+        }
+    }
+
+    private async Task SendWhisperAsync()
+    {
+        if (!CanSendWhisper || hubConnection == null)
+        {
+            return;
+        }
+
+        try
+        {
+            isSendingWhisper = true;
+            errorMessage = "";
+
+            string messageToSend = whisperMessage.Trim();
+            whisperMessage = "";
+
+            await hubConnection.InvokeAsync(
+                "SendWhisper",
+                whisperTarget,
+                messageToSend);
+        }
+        catch (Exception exception)
+        {
+            errorMessage =
+                $"귓속말 전송에 실패했습니다: {exception.Message}";
+        }
+        finally
+        {
+            isSendingWhisper = false;
+        }
+    }
+
+    private async Task ScrollToBottomAsync()
+    {
+        await InvokeAsync(StateHasChanged);
+        await Task.Yield();
+
+        await JS.InvokeVoidAsync(
+            "realtimeChat.scrollToBottom",
+            messageContainer);
+    }
+
+    private async Task HandleMessageKeyDownAsync(KeyboardEventArgs eventArgs)
+    {
+        if (eventArgs.Key == "Enter" && CanSend)
+        {
+            await SendMessageAsync();
+        }
+    }
+
+    private async Task HandleWhisperKeyDownAsync(KeyboardEventArgs eventArgs)
+    {
+        if (eventArgs.Key == "Enter" && CanSendWhisper)
+        {
+            await SendWhisperAsync();
+        }
+    }
+}
