@@ -1,0 +1,127 @@
+﻿@page "/my-profile"
+@using AuthManager.Web.Models
+@using AuthManager.Web.Services
+@inject IUserApiService UserApiService
+@inject ITokenStorageService TokenStorageService
+@inject IAuthApiService AuthApiService
+@inject NavigationManager NavigationManager
+@inject JwtAuthenticationStateProvider AuthenticationStateProvider
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<PageTitle>내 정보</PageTitle>
+
+<h1>내 정보</h1>
+
+@if (isLoading)
+{
+    <p>불러오는 중...</p>
+}
+else if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+
+    <button class="btn btn-primary" @onclick="GoToLogin">
+        로그인 페이지로
+    </button>
+}
+else if (profile != null)
+{
+    <div class="card">
+        <div class="card-body">
+            <p><strong>회원 번호:</strong> @profile.Id</p>
+            <p><strong>아이디:</strong> @profile.Username</p>
+            <p><strong>닉네임:</strong> @profile.Nickname</p>
+            <p><strong>권한:</strong> @profile.Role</p>
+            <p>
+                <strong>가입일:</strong>
+                @profile.CreatedAt.ToLocalTime()
+            </p>
+
+            <button class="btn btn-danger" @onclick="LogoutAsync">
+                로그아웃
+            </button>
+        </div>
+        <a class="btn btn-outline-primary"
+           href="/change-password">
+            비밀번호 변경
+        </a>
+        <a class="btn btn-outline-secondary"
+           href="/edit-profile">
+            내 정보 수정
+        </a>
+    </div>
+}
+
+@code {
+    private MyProfileResponse? profile;
+    private bool isLoading = true;
+    private string errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            profile =
+                await UserApiService.GetMyProfileAsync();
+        }
+        catch (UnauthorizedAccessException exception)
+        {
+            errorMessage = exception.Message;
+
+            await AuthenticationStateProvider
+                .ForceLogoutAsync();
+
+            NavigationManager.NavigateTo(
+                "/login",
+                replace: true);
+        }
+        catch (Exception exception)
+        {
+            errorMessage = exception.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task LogoutAsync()
+    {
+        try
+        {
+            string? refreshToken =
+                await TokenStorageService
+                    .GetRefreshTokenAsync();
+
+            if (!string.IsNullOrWhiteSpace(refreshToken))
+            {
+                await AuthApiService.LogoutAsync(
+                    refreshToken);
+            }
+        }
+        catch
+        {
+            // 서버 로그아웃 실패 여부와 관계없이
+            // 브라우저 토큰은 삭제한다.
+        }
+        finally
+        {
+            await AuthenticationStateProvider
+                .ForceLogoutAsync();
+
+            NavigationManager.NavigateTo(
+                "/login",
+                replace: true);
+        }
+    }
+
+    private void GoToLogin()
+    {
+        NavigationManager.NavigateTo("/login");
+    }
+
+
+}

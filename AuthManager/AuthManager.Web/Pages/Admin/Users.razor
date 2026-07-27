@@ -1,0 +1,227 @@
+﻿@page "/admin/users"
+@attribute [Authorize(Roles = "ADMIN")]
+@using AuthManager.Web.Models
+@using AuthManager.Web.Services
+@using Microsoft.AspNetCore.Authorization
+@inject IAdminApiService AdminApiService
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>사용자 관리</PageTitle>
+
+<h1>사용자 관리</h1>
+
+@if (isLoading)
+{
+    <p>사용자 목록을 불러오는 중...</p>
+}
+else if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+else if (users.Count == 0)
+{
+    <div class="alert alert-info">
+        등록된 사용자가 없습니다.
+    </div>
+}
+else
+{
+    @if (!string.IsNullOrWhiteSpace(successMessage))
+    {
+        <div class="alert alert-success">
+            @successMessage
+        </div>
+    }
+
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>아이디</th>
+                <th>닉네임</th>
+                <th>권한</th>
+                <th>가입일</th>
+                <th>관리</th>
+                <th>상태</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (AdminUserResponse user in users)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Username</td>
+                    <td>@user.Nickname</td>
+                    <td>
+                        <span class="badge @(user.Role == "ADMIN"
+                                                          ? "bg-danger"
+                                                          : "bg-secondary")">
+                            @user.Role
+                        </span>
+                    </td>
+                    <td>@user.CreatedAt.ToLocalTime()</td>
+                    <td>
+                        <button class="btn btn-sm @(user.Role == "ADMIN"
+                                            ? "btn-outline-secondary"
+                                            : "btn-outline-danger")"
+                                    disabled="@(user.Id == currentUserId ||
+                                                        changingUserIds.Contains(user.Id))"
+                                    @onclick="() => ToggleRoleAsync(user)">
+                                    @if (user.Id == currentUserId)
+                                    {
+                                        <span>현재 계정</span>
+                                    }
+                                    else if (changingUserIds.Contains(user.Id))
+                                    {
+                                        <span>변경 중...</span>
+                                    }
+                                    else if (user.Role == "ADMIN")
+                                    {
+                                        <span>USER로 변경</span>
+                                    }
+                                    else
+                                    {
+                                        <span>ADMIN으로 변경</span>
+                                    }
+                        </button>
+                        <button class="btn btn-sm @(user.IsActive
+                                            ? "btn-outline-dark"
+                                            : "btn-outline-success")"
+                                disabled="@(user.Id == currentUserId ||
+                                                    changingUserIds.Contains(user.Id))"
+                                @onclick="() => ToggleStatusAsync(user)">
+                            @(user.IsActive ? "정지" : "활성화")
+                        </button>
+                    </td>
+                    <td>
+                        <span class="badge @(user.IsActive
+                                      ? "bg-success"
+                                      : "bg-dark")">
+                            @(user.IsActive ? "활성" : "정지")
+                        </span>
+                    </td>
+                </tr>
+                }
+        </tbody>
+    </table>
+}
+
+@code {
+    private readonly List<AdminUserResponse> users = [];
+    private readonly HashSet<long> changingUserIds = [];
+
+    private bool isLoading = true;
+    private string errorMessage = "";
+    private string successMessage = "";
+
+    private long currentUserId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authenticationState =
+            await AuthenticationStateProvider
+                .GetAuthenticationStateAsync();
+
+        string? userIdValue =
+            authenticationState.User
+                .FindFirst(ClaimTypes.NameIdentifier)?
+                .Value;
+
+        long.TryParse(userIdValue, out currentUserId);
+
+        await LoadUsersAsync();
+    }
+
+    private async Task LoadUsersAsync()
+    {
+        isLoading = true;
+        errorMessage = "";
+
+        try
+        {
+            List<AdminUserResponse> result =
+                await AdminApiService.GetUsersAsync();
+
+            users.Clear();
+            users.AddRange(result);
+        }
+        catch (Exception exception)
+        {
+            errorMessage = exception.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task ToggleRoleAsync(AdminUserResponse user)
+    {
+        changingUserIds.Add(user.Id);
+        errorMessage = "";
+        successMessage = "";
+
+        try
+        {
+            string newRole =
+                user.Role == "ADMIN"
+                    ? "USER"
+                    : "ADMIN";
+
+            AdminUserResponse updatedUser =
+                await AdminApiService.ChangeRoleAsync(
+                    user.Id,
+                    newRole);
+
+            user.Role = updatedUser.Role;
+
+            successMessage =
+                $"{user.Username} 사용자의 권한을 " +
+                $"{updatedUser.Role}(으)로 변경했습니다.";
+        }
+        catch (Exception exception)
+        {
+            errorMessage = exception.Message;
+        }
+        finally
+        {
+            changingUserIds.Remove(user.Id);
+        }
+    }
+
+    private async Task ToggleStatusAsync(AdminUserResponse user)
+    {
+        changingUserIds.Add(user.Id);
+        errorMessage = "";
+        successMessage = "";
+
+        try
+        {
+            bool newStatus = !user.IsActive;
+
+            AdminUserResponse updatedUser =
+                await AdminApiService.ChangeStatusAsync(
+                    user.Id,
+                    newStatus);
+
+            user.IsActive = updatedUser.IsActive;
+
+            successMessage =
+                $"{user.Username} 사용자를 " +
+                $"{(updatedUser.IsActive ? "활성화" : "정지")}했습니다.";
+        }
+        catch (Exception exception)
+        {
+            errorMessage = exception.Message;
+        }
+        finally
+        {
+            changingUserIds.Remove(user.Id);
+        }
+    }
+}

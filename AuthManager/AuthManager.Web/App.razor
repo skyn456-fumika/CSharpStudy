@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData"
+                                DefaultLayout="@typeof(Layout.MainLayout)">
+                <NotAuthorized>
+                    <LayoutView Layout="@typeof(Layout.MainLayout)">
+                        <div class="alert alert-warning">
+                            이 페이지에 접근할 권한이 없습니다.
+                        </div>
+                    </LayoutView>
+                </NotAuthorized>
+            </AuthorizeRouteView>
+
+            <FocusOnNavigate RouteData="@routeData"
+                             Selector="h1" />
+        </Found>
+
+        <NotFound>
+            <PageTitle>페이지를 찾을 수 없음</PageTitle>
+
+            <LayoutView Layout="@typeof(Layout.MainLayout)">
+                <p role="alert">
+                    요청한 페이지를 찾을 수 없습니다.
+                </p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>
