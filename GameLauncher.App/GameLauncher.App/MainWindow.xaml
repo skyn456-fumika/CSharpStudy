@@ -1,0 +1,196 @@
+﻿<Window
+    x:Class="GameLauncher.App.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Game Launcher"
+    Width="900"
+    Height="520"
+    WindowStartupLocation="CenterScreen">
+
+    <Grid
+        Background="#181A1F">
+
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="70" />
+            <RowDefinition
+                Height="*" />
+            <RowDefinition
+                Height="90" />
+        </Grid.RowDefinitions>
+
+        <!-- 상단 -->
+        <Border
+            Grid.Row="0"
+            Background="#20232A"
+            Padding="24,0">
+
+            <Grid>
+                <TextBlock
+                    Text="GAME LAUNCHER"
+                    Foreground="White"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center" />
+
+                <StackPanel
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+
+                    <TextBlock
+                        Text="{Binding CurrentVersion, StringFormat=현재 버전 {0}}"
+                        Foreground="#AAAAAA"
+                        FontSize="13"
+                        HorizontalAlignment="Right" />
+
+                    <TextBlock
+                        Text="{Binding LatestVersion, StringFormat=최신 버전 {0}}"
+                        Foreground="#777777"
+                        FontSize="12"
+                        Margin="0,4,0,0"
+                        HorizontalAlignment="Right" />
+
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 중앙 -->
+        <Grid
+            Grid.Row="1">
+
+            <StackPanel
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Width="600">
+
+                <TextBlock
+                    Text="MY GAME"
+                    Foreground="White"
+                    FontSize="42"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center" />
+
+                <TextBlock
+                    Text="Game Launcher / Patcher"
+                    Foreground="#AAAAAA"
+                    FontSize="16"
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Center" />
+
+                <Grid
+                    Margin="0,30,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="110" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox
+                        Grid.Column="0"
+                        Text="{Binding GameExecutablePath}"
+                        Height="34"
+                        VerticalContentAlignment="Center"
+                        IsReadOnly="True"
+                        Margin="0,0,10,0" />
+
+                    <Button
+                        Grid.Column="1"
+                        Content="찾아보기"
+                        Command="{Binding BrowseGameCommand}"
+                        Height="34"
+                        Cursor="Hand" />
+                </Grid>
+
+            </StackPanel>
+
+        </Grid>
+
+        
+        <!-- 하단 -->
+        <Border
+            Grid.Row="2"
+            Background="#20232A"
+            Padding="24,15">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition
+                        Height="8" />
+                    <RowDefinition
+                        Height="*" />
+                </Grid.RowDefinitions>
+
+                <ProgressBar
+                    Grid.Row="0"
+                    Minimum="0"
+                    Maximum="100"
+                    Value="{Binding DownloadProgress}" />
+
+                <Grid
+                    Grid.Row="1"
+                    Margin="0,10,0,0">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="*" />
+                            <ColumnDefinition
+                                Width="150" />
+                            <ColumnDefinition
+                                Width="150" />
+                            <ColumnDefinition
+                                Width="160" />
+                            <ColumnDefinition
+                                Width="120" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="{Binding StatusMessage}"
+                            Foreground="#CCCCCC"
+                            VerticalAlignment="Center" />
+
+                        <Button
+                            Grid.Column="1"
+                            Content="업데이트 확인"
+                            Command="{Binding CheckUpdateCommand}"
+                            Height="52"
+                            Margin="0,0,10,0"
+                            Cursor="Hand" />
+
+                        <Button
+                            Grid.Column="2"
+                            Width="150"
+                            Height="52"
+                            Margin="0,0,10,0"
+                            Content="패치 실행"
+                            Command="{Binding PatchCommand}"
+                            Cursor="Hand" />
+
+                        <Button
+                            Grid.Column="3"
+                            Content="게임 실행"
+                            Command="{Binding PlayCommand}"
+                            Height="52"
+                            Margin="0,0,10,0"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Cursor="Hand" />
+
+                        <Button
+                            Grid.Column="4"
+                            Content="패치 취소"
+                            Command="{Binding CancelPatchCommand}"
+                            Width="120"
+                            Height="52"
+                            Margin="0,0,10,0"
+                            Cursor="Hand" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+        </Border>
+
+    </Grid>
+</Window>

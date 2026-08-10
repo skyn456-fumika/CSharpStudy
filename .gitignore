@@ -26,3 +26,4 @@ obj/
 *.db-wal
 appsettings.Development.json
 settings.json
+launcher-settings.json
