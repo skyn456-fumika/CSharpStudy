@@ -1,0 +1,845 @@
+﻿<Window x:Class="GameServerManager.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="GameServerManager"
+        Width="1200"
+        Height="760"
+        MinWidth="1000"
+        MinHeight="620"
+        WindowStartupLocation="CenterScreen"
+        StateChanged="Window_StateChanged"
+        Closing="Window_Closing">
+
+    <Grid Background="#F3F4F6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="36" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Padding="24,0"
+                Background="#111827">
+            <Grid>
+                <TextBlock VerticalAlignment="Center"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Text="GameServerManager" />
+
+                <TextBlock HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Foreground="#D1D5DB"
+                           Text="게임 서버 통합 관리 도구" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1"
+              Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*" MinHeight="330" />
+                <RowDefinition Height="16" />
+                <RowDefinition Height="2*" MinHeight="220" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- 서버 목록 -->
+            <Grid Grid.Column="0"
+                  Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0"
+                            Margin="0,0,0,16">
+                    <TextBlock FontSize="22"
+                               FontWeight="SemiBold"
+                               Text="서버 목록" />
+
+                    <TextBlock Margin="0,5,0,0"
+                               Foreground="#6B7280"
+                               Text="등록된 게임 서버의 상태를 관리합니다." />
+
+                    <Grid Margin="0,12,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Height="38"
+                                Background="#16A34A"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Content="전체 서버 실행"
+                                Command="{Binding StartAllServersCommand}" />
+
+                        <Button Grid.Column="2"
+                                Height="38"
+                                Background="#DC2626"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Content="전체 서버 종료"
+                                Command="{Binding StopAllServersCommand}" />
+                    </Grid>
+                </StackPanel>
+
+                <Grid Margin="0,0,0,16"
+                      Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0"
+            Padding="14"
+            CornerRadius="8"
+            Background="#F3F4F6">
+                        <StackPanel>
+                            <TextBlock FontSize="12"
+                       Foreground="#6B7280"
+                       Text="등록 서버" />
+
+                            <TextBlock Margin="0,6,0,0"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Text="{Binding TotalServerCount}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="2"
+            Padding="14"
+            CornerRadius="8"
+            Background="#F3F4F6">
+                        <StackPanel>
+                            <TextBlock FontSize="12"
+                       Foreground="#6B7280"
+                       Text="실행 중" />
+
+                            <TextBlock Margin="0,6,0,0"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Text="{Binding RunningServerCount}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="4"
+            Padding="14"
+            CornerRadius="8"
+            Background="#F3F4F6">
+                        <StackPanel>
+                            <TextBlock FontSize="12"
+                       Foreground="#6B7280"
+                       Text="정상" />
+
+                            <TextBlock Margin="0,6,0,0"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Text="{Binding HealthyServerCount}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="6"
+            Padding="14"
+            CornerRadius="8"
+            Background="#F3F4F6">
+                        <StackPanel>
+                            <TextBlock FontSize="12"
+                       Foreground="#6B7280"
+                       Text="장애" />
+
+                            <TextBlock Margin="0,6,0,0"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Text="{Binding ProblemServerCount}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="8"
+            Padding="14"
+            CornerRadius="8"
+            Background="#F3F4F6">
+                        <StackPanel>
+                            <TextBlock FontSize="12"
+                       Foreground="#6B7280"
+                       Text="리소스 경고" />
+
+                            <TextBlock Margin="0,6,0,0"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Text="{Binding WarningServerCount}" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Border Grid.Row="2"
+                        Padding="16"
+                        Background="White"
+                        BorderBrush="#D1D5DB"
+                        BorderThickness="1"
+                        CornerRadius="8">
+
+                    <DataGrid ItemsSource="{Binding Servers}"
+                              SelectedItem="{Binding SelectedServer}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              CanUserAddRows="False"
+                              HeadersVisibility="Column"
+                              GridLinesVisibility="Horizontal"
+                              RowHeaderWidth="0"
+                              SelectionMode="Single"
+                              SelectionUnit="FullRow"
+                              HorizontalScrollBarVisibility="Auto">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="130"
+                    Header="서버 이름"
+                    Binding="{Binding ServerName}" />
+
+                            <DataGridTextColumn Width="90"
+                    Header="프로세스"
+                    Binding="{Binding StatusText}" />
+
+                            <DataGridTextColumn Width="100"
+                    Header="종합 상태"
+                    Binding="{Binding OverallStatusText}" />
+
+                            <DataGridTextColumn Width="120"
+                    Header="호스트"
+                    Binding="{Binding Host}" />
+
+                            <DataGridTextColumn Width="70"
+                    Header="포트"
+                    Binding="{Binding Port}" />
+
+                            <DataGridTextColumn Width="60"
+                    Header="순서"
+                    Binding="{Binding StartOrder}" />
+
+                            <DataGridTextColumn Width="120"
+                    Header="선행 서버"
+                    Binding="{Binding DependencyServerName}" />
+
+                            <DataGridTextColumn Width="70"
+                    Header="PID"
+                    Binding="{Binding ProcessIdText}" />
+
+                            <DataGridTextColumn Width="70"
+                    Header="CPU"
+                    Binding="{Binding CpuUsageText}" />
+
+                            <DataGridTextColumn Width="90"
+                    Header="메모리"
+                    Binding="{Binding MemoryUsageText}" />
+
+                            <DataGridTextColumn Width="100"
+                    Header="가동 시간"
+                    Binding="{Binding UptimeText}" />
+
+                            <DataGridTextColumn Width="100"
+                    Header="TCP 상태"
+                    Binding="{Binding TcpStatusText}" />
+
+                            <DataGridTextColumn Width="90"
+                    Header="응답 시간"
+                    Binding="{Binding ResponseTimeText}" />
+
+                            <DataGridTextColumn Width="90"
+                    Header="최근 검사"
+                    Binding="{Binding LastCheckedAtText}" />
+
+                            <DataGridTextColumn Width="80"
+                    Header="연속 실패"
+                    Binding="{Binding TcpFailureCountText}" />
+
+                            <DataGridTextColumn Width="100"
+                    Header="최근 재시작"
+                    Binding="{Binding LastRestartedAtText}" />
+
+                            <DataGridCheckBoxColumn Width="100"
+                        Header="자동 재시작"
+                        Binding="{Binding AutoRestart}" />
+
+                            <DataGridTextColumn Width="150"
+                    Header="리소스 경고"
+                    Binding="{Binding ResourceWarningText}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </Grid>
+
+            <!-- 서버 입력 -->
+            <Grid Grid.Column="2"
+                  Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0"
+                            Margin="0,0,0,16">
+                    <TextBlock FontSize="22"
+                               FontWeight="SemiBold"
+                               Text="서버 정보" />
+
+                    <TextBlock Margin="0,5,0,0"
+                               Foreground="#6B7280"
+                               Text="서버를 등록하거나 선택한 서버를 수정합니다." />
+                </StackPanel>
+
+                <Border Grid.Row="1"
+                        Padding="20"
+                        Background="White"
+                        BorderBrush="#D1D5DB"
+                        BorderThickness="1"
+                        CornerRadius="8">
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <TextBlock FontWeight="SemiBold"
+                                       Text="서버 이름" />
+
+                            <TextBox Height="36"
+                                     Margin="0,6,0,14"
+                                     Padding="8,0"
+                                     VerticalContentAlignment="Center"
+                                     Text="{Binding ServerNameInput,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+
+                            <TextBlock FontWeight="SemiBold"
+                                       Text="실행 파일" />
+
+                            <Grid Margin="0,6,0,14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="80" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox Grid.Column="0"
+                                         Height="36"
+                                         Padding="8,0"
+                                         VerticalContentAlignment="Center"
+                                         Text="{Binding ExecutablePathInput,
+                                                      UpdateSourceTrigger=PropertyChanged}" />
+
+                                <Button Grid.Column="2"
+                                        Height="36"
+                                        Content="찾아보기"
+                                        Command="{Binding BrowseExecutableCommand}" />
+                            </Grid>
+
+                            <TextBlock FontWeight="SemiBold"
+                                       Text="실행 인자" />
+
+                            <TextBox Height="36"
+                                     Margin="0,6,0,14"
+                                     Padding="8,0"
+                                     VerticalContentAlignment="Center"
+                                     Text="{Binding ArgumentsInput,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+
+                            <TextBlock FontWeight="SemiBold"
+                                       Text="작업 폴더" />
+
+                            <TextBox Height="36"
+                                     Margin="0,6,0,14"
+                                     Padding="8,0"
+                                     VerticalContentAlignment="Center"
+                                     Text="{Binding WorkingDirectoryInput,
+                                                  UpdateSourceTrigger=PropertyChanged}" />
+
+                            <Grid Margin="0,0,0,14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="12" />
+                                    <ColumnDefinition Width="120" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock FontWeight="SemiBold"
+                                               Text="호스트" />
+
+                                    <TextBox Height="36"
+                                             Margin="0,6,0,0"
+                                             Padding="8,0"
+                                             VerticalContentAlignment="Center"
+                                             Text="{Binding HostInput,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock FontWeight="SemiBold"
+                                               Text="포트" />
+
+                                    <TextBox Height="36"
+                                             Margin="0,6,0,0"
+                                             Padding="8,0"
+                                             VerticalContentAlignment="Center"
+                                             Text="{Binding PortInput,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+
+                                    <TextBlock FontWeight="SemiBold"
+                                                Text="실행 순서" />
+
+                                    <TextBox Height="36"
+                                             Margin="0,6,0,14" 
+                                             Padding="8,0"
+                                             VerticalContentAlignment="Center"
+                                             Text="{Binding StartOrderInput,
+                                                            UpdateSourceTrigger=PropertyChanged}" />
+
+                                    <TextBlock FontWeight="SemiBold"
+                                                Text="선행 서버" />
+
+                                    <ComboBox Height="36"
+                                              Margin="0,6,0,14"
+                                              ItemsSource="{Binding AvailableDependencyServers}"
+                                              SelectedItem="{Binding SelectedDependencyServer}"
+                                              DisplayMemberPath="ServerName" />
+
+                                    <Button Height="32"
+                                            Margin="0,0,0,14"
+                                            Content="선행 서버 지정 해제"
+                                            Command="{Binding ClearDependencyCommand}" />
+                                </StackPanel>
+                            </Grid>
+
+                            <CheckBox Margin="0,0,0,20"
+                                      IsChecked="{Binding AutoRestartInput}"
+                                      Content="비정상 종료 시 자동 재시작" />
+
+                            <TextBlock FontWeight="SemiBold"
+           Text="CPU 경고 기준 (%)" />
+
+                            <TextBox Height="36"
+         Margin="0,6,0,14"
+         Padding="8,0"
+         VerticalContentAlignment="Center"
+         Text="{Binding CpuWarningThresholdInput,
+                        UpdateSourceTrigger=PropertyChanged}" />
+
+                            <TextBlock FontWeight="SemiBold"
+           Text="메모리 경고 기준 (MB)" />
+
+                            <TextBox Height="36"
+         Margin="0,6,0,14"
+         Padding="8,0"
+         VerticalContentAlignment="Center"
+         Text="{Binding MemoryWarningThresholdInput,
+                        UpdateSourceTrigger=PropertyChanged}" />
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0"
+                                        Height="38"
+                                        Background="#2563EB"
+                                        Foreground="White"
+                                        BorderThickness="0"
+                                        Content="서버 등록"
+                                        Command="{Binding AddServerCommand}" />
+
+                                <Button Grid.Column="2"
+                                        Height="38"
+                                        Content="선택 서버 수정"
+                                        Command="{Binding UpdateServerCommand}" />
+                            </Grid>
+
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0"
+                                        Height="38"
+                                        Content="입력 초기화"
+                                        Command="{Binding ClearFormCommand}" />
+
+                                <Button Grid.Column="2"
+                                        Height="38"
+                                        Background="#DC2626"
+                                        Foreground="White"
+                                        BorderThickness="0"
+                                        Content="선택 서버 삭제"
+                                        Command="{Binding DeleteServerCommand}" />
+                            </Grid>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0"
+            Height="40"
+            Background="#16A34A"
+            Foreground="White"
+            BorderThickness="0"
+            Content="선택 서버 실행"
+            Command="{Binding StartServerCommand}" />
+
+                                <Button Grid.Column="2"
+            Height="40"
+            Background="#EA580C"
+            Foreground="White"
+            BorderThickness="0"
+            Content="선택 서버 종료"
+            Command="{Binding StopServerCommand}" />
+                            </Grid>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0"
+            Height="40"
+            Background="#7C3AED"
+            Foreground="White"
+            BorderThickness="0"
+            Content="선택 서버 TCP 검사"
+            Command="{Binding CheckTcpCommand}" />
+
+                                <Button Grid.Column="2"
+            Height="40"
+            Content="TCP 자동 감시 시작"
+            Command="{Binding StartHealthMonitoringCommand}" />
+                            </Grid>
+
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0"
+            Height="40"
+            Content="TCP 자동 감시 중지"
+            Command="{Binding StopHealthMonitoringCommand}" />
+
+                                <TextBlock Grid.Column="2"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"
+               Foreground="#4B5563"
+               Text="{Binding HealthMonitoringStatusText}" />
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="2"
+      Grid.Column="0"
+      Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0"
+                        Padding="16"
+                        Background="White"
+                        BorderBrush="#D1D5DB"
+                        BorderThickness="1"
+                        CornerRadius="8">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="240" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                           VerticalAlignment="Center"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           Text="선택 서버 로그" />
+
+                            <TextBox Grid.Column="2"
+                         Height="34"
+                         Padding="8,0"
+                         VerticalContentAlignment="Center"
+                         Text="{Binding LogSearchText,
+                                        UpdateSourceTrigger=PropertyChanged}" />
+
+                            <Button Grid.Column="4"
+                        Height="34"
+                        Content="로그 삭제"
+                        Command="{Binding ClearLogsCommand}" />
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="110" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="0"
+                                     Height="36"
+                                     Padding="10,0"
+                                     VerticalContentAlignment="Center"
+                                     Text="{Binding ServerCommandInput,
+                                                    UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="status, players, announce, shutdown, crash" />
+
+                            <Button Grid.Column="2"
+                                    Height="36"
+                                    Background="#7C3AED"
+                                    Foreground="White"
+                                    BorderThickness="0"
+                                    Content="명령 전송"
+                                    Command="{Binding SendServerCommand}" />
+                        </Grid>
+
+                        <DataGrid x:Name="ServerLogDataGrid"
+                      Grid.Row="4"
+                      ItemsSource="{Binding SelectedServerLogs}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal"
+                      RowHeaderWidth="0">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="90"
+                                        Header="시각"
+                                        Binding="{Binding CreatedAtText}" />
+
+                                <DataGridTextColumn Width="90"
+                                        Header="레벨"
+                                        Binding="{Binding Level}" />
+
+                                <DataGridTextColumn Width="*"
+                                        Header="메시지"
+                                        Binding="{Binding Message}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Column="2"
+        Padding="16"
+        Background="White"
+        BorderBrush="#D1D5DB"
+        BorderThickness="1"
+        CornerRadius="8">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="12" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="8" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="8" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!-- 제목 + 버튼 -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="90" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   FontWeight="SemiBold"
+                   Text="서버 이력" />
+
+                                <Button Grid.Column="1"
+                Height="34"
+                Content="새로고침"
+                Command="{Binding RefreshHistoriesCommand}" />
+
+                                <Button Grid.Column="3"
+                Height="34"
+                Background="#DC2626"
+                Foreground="White"
+                BorderThickness="0"
+                Content="전체 삭제"
+                Command="{Binding DeleteAllHistoriesCommand}" />
+                            </Grid>
+
+                            <!-- 보관 기간 -->
+                            <StackPanel Grid.Row="2"
+                Orientation="Horizontal"
+                HorizontalAlignment="Left">
+
+                                <TextBlock Margin="0,0,8,0"
+                   VerticalAlignment="Center"
+                   Text="이력 보관 기간" />
+
+                                <TextBox Width="60"
+                 Height="34"
+                 Padding="6,0"
+                 VerticalContentAlignment="Center"
+                 Text="{Binding HistoryRetentionDays}" />
+
+                                <TextBlock Margin="6,0,0,0"
+                   VerticalAlignment="Center"
+                   Text="일" />
+                            </StackPanel>
+
+                            <CheckBox Grid.Row="4"
+          VerticalAlignment="Center"
+          Content="프로그램 시작 시 TCP 자동 감시"
+          IsChecked="{Binding StartHealthMonitoringOnLaunch}" />
+
+                        </Grid>
+
+                        <Grid Grid.Row="2"
+      Margin="0,0,0,12">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="8" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!-- 서버 + 이벤트 -->
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox Grid.Column="0"
+                  Height="34"
+                  ItemsSource="{Binding Servers}"
+                  SelectedItem="{Binding HistoryServerFilter}"
+                  DisplayMemberPath="ServerName"
+                  ToolTip="서버 선택" />
+
+                                <ComboBox Grid.Column="2"
+                  Height="34"
+                  ItemsSource="{Binding HistoryEventFilters}"
+                  SelectedItem="{Binding HistoryEventFilter}"
+                  ToolTip="이벤트 선택" />
+                            </Grid>
+
+                            <!-- 결과 + 조회 + 초기화 -->
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="8" />
+                                    <ColumnDefinition Width="80" />
+                                </Grid.ColumnDefinitions>
+
+                                <ComboBox Grid.Column="0"
+                  Height="34"
+                  ItemsSource="{Binding HistoryResultFilters}"
+                  SelectedItem="{Binding HistoryResultFilter}"
+                  ToolTip="결과 선택" />
+
+                                <Button Grid.Column="2"
+                Height="34"
+                Content="조회"
+                Command="{Binding ApplyHistoryFilterCommand}" />
+
+                                <Button Grid.Column="4"
+                Height="34"
+                Content="초기화"
+                Command="{Binding ResetHistoryFilterCommand}" />
+                            </Grid>
+                        </Grid>
+
+                        <DataGrid Grid.Row="3"
+                  ItemsSource="{Binding ServerHistories}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="Horizontal"
+                  RowHeaderWidth="0"
+                                  HorizontalScrollBarVisibility="Auto"
+VerticalScrollBarVisibility="Auto">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="110"
+                                    Header="서버"
+                                    Binding="{Binding ServerName}" />
+
+                                <DataGridTextColumn Width="110"
+                                    Header="이벤트"
+                                    Binding="{Binding EventType}" />
+
+                                <DataGridTextColumn Width="70"
+                                    Header="결과"
+                                    Binding="{Binding ResultText}" />
+
+                                <DataGridTextColumn Width="150"
+                                    Header="시각"
+                                    Binding="{Binding CreatedAtText}" />
+
+                                <DataGridTextColumn Width="*"
+                                    Header="내용"
+                                    Binding="{Binding Message}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Border Grid.Row="2"
+                Padding="16,0"
+                Background="#E5E7EB">
+            <TextBlock VerticalAlignment="Center"
+                       Foreground="#4B5563"
+                       Text="{Binding StatusMessage}" />
+        </Border>
+    </Grid>
+</Window>
