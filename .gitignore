@@ -27,3 +27,15 @@ obj/
 appsettings.Development.json
 settings.json
 launcher-settings.json
+
+# Unity generated IDE files
+GameLauncher/UnityGame/*.csproj
+GameLauncher/UnityGame/*.sln
+
+GameLauncher/UnityGameBuild/
+GameLauncher/PatchServer/files/
+GameLauncher/UnityGame/Library/
+GameLauncher/UnityGame/Temp/
+GameLauncher/UnityGame/Logs/
+GameLauncher/UnityGame/obj/
+GameLauncher/UnityGame/UserSettings/

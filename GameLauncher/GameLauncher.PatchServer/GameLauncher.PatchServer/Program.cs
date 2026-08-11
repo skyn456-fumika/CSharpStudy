@@ -1,54 +1,83 @@
-﻿using System.Security.Cryptography;
-
-var builder = WebApplication.CreateBuilder(args);
+﻿var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-// 테스트용 10MB 패치 파일
-byte[] configData = new byte[10 * 1024 * 1024];
+string patchRoot = Path.GetFullPath(
+    Path.Combine(
+        app.Environment.ContentRootPath,
+        "..",
+        "..",
+        "PatchServer"));
 
-string configHash = Convert.ToHexString(
-    SHA256.HashData(configData));
+string filesRoot = Path.Combine(
+    patchRoot,
+    "files");
 
-app.MapGet("/", () => "GameLauncher Patch Server");
+app.MapGet("/", () =>
+{
+    return "GameLauncher Patch Server";
+});
 
 app.MapGet("/version.json", () =>
 {
-    return Results.Json(new
+    string path = Path.Combine(
+        patchRoot,
+        "version.json");
+
+    if (!File.Exists(path))
     {
-        Version = "1.4.0"
-    });
+        return Results.NotFound();
+    }
+
+    return Results.File(
+        path,
+        "application/json");
 });
 
 app.MapGet("/manifest.json", () =>
 {
-    return Results.Json(new
+    string path = Path.Combine(
+        patchRoot,
+        "manifest.json");
+
+    if (!File.Exists(path))
     {
-        Version = "1.4.0",
+        return Results.NotFound();
+    }
 
-        Files = new[]
-        {
-            new
-            {
-                Path = "TestGameServer.exe",    // GameServerManager 프로젝트의 테스트 실행 파일을 게임 exe로 사용
-                Size = 156160L,
-                Hash = ""
-            },
-            new
-            {
-                Path = "Data/config.dat",
-                Size = configData.LongLength,
-                Hash = configHash
-            }
-        }
-    });
-});
-
-app.MapGet("/files/Data/config.dat", () =>
-{
     return Results.File(
-        configData,
-        "application/octet-stream",
-        "config.dat");
+        path,
+        "application/json");
 });
+
+app.MapGet("/files/{**filePath}", (string filePath) =>
+{
+    string requestedPath = Path.GetFullPath(
+        Path.Combine(
+            filesRoot,
+            filePath));
+
+    string normalizedFilesRoot =
+        Path.GetFullPath(filesRoot)
+        + Path.DirectorySeparatorChar;
+
+    if (!requestedPath.StartsWith(
+        normalizedFilesRoot,
+        StringComparison.OrdinalIgnoreCase))
+    {
+        return Results.BadRequest();
+    }
+
+    if (!File.Exists(requestedPath))
+    {
+        return Results.NotFound();
+    }
+
+    return Results.File(
+        requestedPath,
+        "application/octet-stream");
+});
+
+Console.WriteLine($"ContentRootPath: {app.Environment.ContentRootPath}");
+Console.WriteLine($"PatchRoot: {patchRoot}");
 
 app.Run();

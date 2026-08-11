@@ -1,0 +1,875 @@
+{
+  "version": "1.7.0",
+  "files": [
+    {
+      "path": "D3D12/D3D12Core.dll",
+      "size": 4725304,
+      "hash": "625BD40005B1C3708695D5256ECF230D278E6B8EDBA5A88AF70F3D91324F3052"
+    },
+    {
+      "path": "MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll",
+      "size": 7828904,
+      "hash": "872A64A28333D54346F5E38D8420FF40E50769DC546B241EDE1889531B6A9150"
+    },
+    {
+      "path": "MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll",
+      "size": 611248,
+      "hash": "3E2781B551C03139020719C43B2EFFF0F3021B663889C3EA095A1F769D688D84"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser",
+      "size": 1605,
+      "hash": "8A1082057AC5681DCD4E9C227ED7FB8EB42AC1618963B5DE3B65739DD77E2741"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx",
+      "size": 60575,
+      "hash": "751861040B69EA63A3827507B7C8DA9C7F549DC181C1C8AF4B7CA78CC97D710A"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/machine.config",
+      "size": 29066,
+      "hash": "E91782A27FA39FC6C1D6EE8B08529F5D35052310D0006034B878EB04B8F2AF30"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/settings.map",
+      "size": 2622,
+      "hash": "49C6160F9D54AF4270A3B4E997FC4A8301F79B9E2070118FA46DDBCBBC44F9A2"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/2.0/web.config",
+      "size": 11635,
+      "hash": "CF2B54339E069B9E42F7D6795EECBF562C50C1011F4CA8F65F578FE52D97FF92"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser",
+      "size": 1605,
+      "hash": "8A1082057AC5681DCD4E9C227ED7FB8EB42AC1618963B5DE3B65739DD77E2741"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx",
+      "size": 60575,
+      "hash": "751861040B69EA63A3827507B7C8DA9C7F549DC181C1C8AF4B7CA78CC97D710A"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/machine.config",
+      "size": 33598,
+      "hash": "E60AEC2C5115D65B3ACB3C55EA21576DBD770F579166C017125571E46AE560ED"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/settings.map",
+      "size": 2622,
+      "hash": "CE1DB1AD8A9512073164E3ECCDC193F7EDA036E1A9733CAEC4635DE21B2865C8"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.0/web.config",
+      "size": 18802,
+      "hash": "E38BB8CC68FE5B4EDECDFD288D094B9E8CED7629039B2A347682ABA0D8BD7492"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser",
+      "size": 1605,
+      "hash": "8A1082057AC5681DCD4E9C227ED7FB8EB42AC1618963B5DE3B65739DD77E2741"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx",
+      "size": 60575,
+      "hash": "751861040B69EA63A3827507B7C8DA9C7F549DC181C1C8AF4B7CA78CC97D710A"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/machine.config",
+      "size": 34056,
+      "hash": "EE950004B576FB28DC85F4B0435ED04BF96612DE2E8B53BE84D07AFE85A0DE6C"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/settings.map",
+      "size": 2622,
+      "hash": "CE1DB1AD8A9512073164E3ECCDC193F7EDA036E1A9733CAEC4635DE21B2865C8"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/4.5/web.config",
+      "size": 18811,
+      "hash": "C4CBDDD4FD9347B58CC5A72B36DC4BA1AD2BB699E65869D05CD3FB9865F0D824"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/browscap.ini",
+      "size": 311984,
+      "hash": "4DDD50F31FB968F30BEDEFC253A46DC3F2890192D05CDAA9E0A64A056EEE807E"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/config",
+      "size": 3815,
+      "hash": "5776169973A26A387B8B3E5C0F2301A7AB9A6DD7C7D3EFA22A96ABC47FBF8662"
+    },
+    {
+      "path": "MonoBleedingEdge/etc/mono/mconfig/config.xml",
+      "size": 25817,
+      "hash": "0C56E34C69124510FA8C19E7B4C2CA6C1C4FF460AE19F798DD0CA035809E396D"
+    },
+    {
+      "path": "UnityCrashHandler64.exe",
+      "size": 1669552,
+      "hash": "38A87BF9C83B54CDA605F4FEACED264E6010B69C1F47C80C567213C5C07CC971"
+    },
+    {
+      "path": "UnityGame_Data/app.info",
+      "size": 24,
+      "hash": "FC7238BC301657AC9DF35F5A1C1A5FAC6F18C7EDE8007E2F3DCE5BDFB1FC84B3"
+    },
+    {
+      "path": "UnityGame_Data/boot.config",
+      "size": 156,
+      "hash": "B6E4E90B7642C7B80D71EA33E2D623BE7E9664A2E76A7230E739ACFA8E6AA4CE"
+    },
+    {
+      "path": "UnityGame_Data/globalgamemanagers",
+      "size": 216644,
+      "hash": "2D8B0DDB54271DE447C28139BB4FDD496284ACE4796D9965E83FC5AE1FAD0496"
+    },
+    {
+      "path": "UnityGame_Data/globalgamemanagers.assets",
+      "size": 999464,
+      "hash": "A229264B74B400FB23D79DCE508BD9CA7247B0830531D29CECBC44FE69131A1A"
+    },
+    {
+      "path": "UnityGame_Data/globalgamemanagers.assets.resS",
+      "size": 6174944,
+      "hash": "26B24BBD0BDB7017ECBAC3B829C0ED7C4848BC343AF5702E96EBDB75A7258B04"
+    },
+    {
+      "path": "UnityGame_Data/level0",
+      "size": 18452,
+      "hash": "DF78CA1D2AC9C966607074BFCD1F58165B1518838226C5FD0DBE2CF36214FBA2"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Assembly-CSharp.dll",
+      "size": 22016,
+      "hash": "7E061B9510CD2F301464FA381369DC06267CDA2C0A3F8164E9AE2F1AF62BE49C"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Mono.Security.dll",
+      "size": 241152,
+      "hash": "618009319DBF3AE374F9B5DC0D0522E1E1BDD172200C120A5471747B7991A584"
+    },
+    {
+      "path": "UnityGame_Data/Managed/mscorlib.dll",
+      "size": 4632064,
+      "hash": "6C76E06E6D44CF0F39BF59E6A90770968B70093AD4C1572DFBC5E46E431C5FBF"
+    },
+    {
+      "path": "UnityGame_Data/Managed/netstandard.dll",
+      "size": 90112,
+      "hash": "6AE62E082DC494A2433984177F60CA4DB5FAE69B1F360A8B33754172B310B8C5"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.ComponentModel.Composition.dll",
+      "size": 257024,
+      "hash": "0C3E81771A5FE9657BEA02887996DE72606C3CB247E4FBE413F743F40E2AF244"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Configuration.dll",
+      "size": 124928,
+      "hash": "04907729E87A101E62D3A5C93CFA16688BEE745D05440D6DAA0C541964BE27AB"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Core.dll",
+      "size": 1113088,
+      "hash": "A5E7D47313DA0ECA0B92A901A30498F5E970916FAF63B70B74DD62B09760ED72"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Data.DataSetExtensions.dll",
+      "size": 29696,
+      "hash": "498F14C37D83F946A47A79E01DE777E62F269EE9C3820F2026B59AB1C1B9222F"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Data.dll",
+      "size": 2125312,
+      "hash": "427478545CE66B632414CA838088EA073F250ED16B21C70005F48CB571350E47"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.dll",
+      "size": 2641920,
+      "hash": "7019D6B6DBFA07CF30F62E7D3CCB969F70CBF001FD72112938FFB535C7F75D81"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Drawing.dll",
+      "size": 489984,
+      "hash": "E182E688223ACEDB8135227E8FBFF17D5ED22F47F81141AA9CB96EF1AB9926FC"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.EnterpriseServices.dll",
+      "size": 44544,
+      "hash": "84AF394AD863E31407EB2B9555CA7E96A9F1966630F5D7F0EEC54F0011F6BABC"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.IO.Compression.dll",
+      "size": 114688,
+      "hash": "80421A67B4162A5F1B4AAD6A8327C6D1FB4B04DEDD39DAE14A770B812594FAE2"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.IO.Compression.FileSystem.dll",
+      "size": 18432,
+      "hash": "2730D2A27F9362259A406EA14727E5F0A71BC21A6825BE94F8623A84BD9F9C79"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Net.Http.dll",
+      "size": 122880,
+      "hash": "3CD3AC19050D5031C13644CD87958AD8029B79CE16C7747FAF3D0542E7FB45A3"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Numerics.dll",
+      "size": 119296,
+      "hash": "AC9224B32355A09F09B706CAB568384F64CF8116825C5911CEF1E13221C61C38"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Runtime.dll",
+      "size": 12288,
+      "hash": "E0A7334B7BA419AAAB6BD3BB6992D693E689341A9178172C9BF99C2AA6A085BD"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Runtime.Serialization.dll",
+      "size": 934400,
+      "hash": "1152EF687DBE39E0CCB6B9A68F6501004415A729072DF29ABAB3BC7C66840217"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Security.dll",
+      "size": 320000,
+      "hash": "2101A4DD4475285F96B1AC3BA1715A52AA8067690709E675CC49A9EB8ED901A4"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.ServiceModel.Internals.dll",
+      "size": 215040,
+      "hash": "888EC94A59C127854871B76AFA49FDCEFDF723C0F0B6FD78E87F73A8495B63B5"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Transactions.dll",
+      "size": 35328,
+      "hash": "F65DBC257D26A361DCC01EDD58BF3E542D186C8EE492A4F7A62B0DD7D59F7050"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Xml.dll",
+      "size": 3160064,
+      "hash": "79194220ADFCF027A334C87B1ADCC6D07B9660A4061E04B3D9500C10D30F7D49"
+    },
+    {
+      "path": "UnityGame_Data/Managed/System.Xml.Linq.dll",
+      "size": 136704,
+      "hash": "4F5D6BF313CBF091E7BFF83D07DD03ED93D0ECB3DDB025AE786AADD6B5F477FB"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.AI.Navigation.dll",
+      "size": 24576,
+      "hash": "49ECA91F64AEA85EA46EFF066B3220B696A817AF9778056D3C5C2227624B0D53"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.Burst.dll",
+      "size": 304640,
+      "hash": "3AA4AAF86F260D0CD5B1FFC08E21C9C60F592F27B4877D1EB4193B1EE5D5C8BD"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.Burst.Unsafe.dll",
+      "size": 5632,
+      "hash": "9D9C1FF52411DECBEE5D9F0D1CD61EBEAA222077AA77A52101EA3DEBAFAE98E2"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.Collections.dll",
+      "size": 453632,
+      "hash": "4E7C8556EDB99AC517E3D09B1A0C4E069A7C72657D954BEA9F3464C54192F342"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.Collections.LowLevel.ILSupport.dll",
+      "size": 5120,
+      "hash": "FF50383F807F9692E4913B97E47D86FEFCB8FAA33D6D48CD3E3FD6FC7FFB448D"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.InputSystem.dll",
+      "size": 1151488,
+      "hash": "37281D0DB3B861A6EBD3C0E91965E1B1EB91284F4ACD9CB627D3DDBCB9848CE4"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.InputSystem.ForUI.dll",
+      "size": 16896,
+      "hash": "AB9B2EC47CEAA208FAC3D3AC0A29778CB04ED0D62E8194ACD301DCCDB7BE9EFF"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.InternalAPIEngineBridge.004.dll",
+      "size": 4608,
+      "hash": "1885AE3784A7CF8C03DEC58D7B9E1327851A362E2C8C85B169AE208F6EFA8443"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.Mathematics.dll",
+      "size": 752640,
+      "hash": "4FBCD0DEF1E85F4EB59F727DF8CBD5CC7FBE921FA3CDF26084A058F42919335D"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.Multiplayer.Center.Common.dll",
+      "size": 10752,
+      "hash": "EEF267AE206D8034E41EFBFB1723083ACB1F06CCCF5F90E479E8D9900879079A"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.RenderPipeline.Universal.ShaderLibrary.dll",
+      "size": 9216,
+      "hash": "9F5C9C6D069E1B885AA7337C45C699846AB952CC9200600585B55ECD0FCA5E4B"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.RenderPipelines.Core.Runtime.dll",
+      "size": 1203200,
+      "hash": "FCCD11397E4AFAE3BF1DDFFF2103872255769AA2037B9311D348A236A4E5306D"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.RenderPipelines.Core.Runtime.Shared.dll",
+      "size": 5632,
+      "hash": "653A11AAEFAB5ACA14C3836E0DB17C75E41E8784D00A6A3BE8475C00EEED9B2C"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.RenderPipelines.Core.ShaderLibrary.dll",
+      "size": 4608,
+      "hash": "7694E6DA1E41A8E8C98912D09CF8C666571E3A5CD2B143F91111AC6766564B44"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.RenderPipelines.GPUDriven.Runtime.dll",
+      "size": 235520,
+      "hash": "3FEAA2D9D371B2A6004D24D2B440B6D1BCFB719736A8E62CF99F7B203889FFAC"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll",
+      "size": 4608,
+      "hash": "18DDCFC1C35C4CDCE383537AFE83DD417E122D8C1BCBF018DCBBF7B8E8DA2432"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.RenderPipelines.Universal.2D.Runtime.dll",
+      "size": 233472,
+      "hash": "EEF8A0E8BA27317FBEC7744071469A1997077505CBFB49CEE09F1B6263ED3EC2"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.RenderPipelines.Universal.Config.Runtime.dll",
+      "size": 5632,
+      "hash": "8AF2FC47BA9D1D37FEBB2C72988D8F110DBC97C7706639CEAF73EB272A89A943"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.RenderPipelines.Universal.Runtime.dll",
+      "size": 761856,
+      "hash": "66C6BA207C4D0FCEE64CEC7A307CFEF89421EB84566B16B75745B734CC9DF16F"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.RenderPipelines.Universal.Shaders.dll",
+      "size": 4608,
+      "hash": "E9B3DC3D8A24AB5DCBBDA77A9E8B0A237F5E8A4EE4005AD27E1E26143E27CB28"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.TextMeshPro.dll",
+      "size": 445952,
+      "hash": "2A95094FFA84560D9CDEBB7D3DDA3BFA3A232115FC477A0DA3BC25B8C36C4541"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.Timeline.dll",
+      "size": 134656,
+      "hash": "6ECA7D6A1633BBD5BCF712F89DF5C4E836034CC3EBB95B1852028AD2516778F4"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.UnifiedRayTracing.Runtime.dll",
+      "size": 101376,
+      "hash": "1FAB4A53DF81B1F8298B982CFF2A28AC30CE7E78666370C1FD474FBD83FB704C"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.VisualScripting.Antlr3.Runtime.dll",
+      "size": 86016,
+      "hash": "ED7CE205F66EAFE39BBB5D084D42E7FE11CB4B386FF208E5D5110891BE0B7B37"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.VisualScripting.Core.dll",
+      "size": 630272,
+      "hash": "BF504C475342DF4C70F70A7891F021A50D0E62E8704FB2474C130B8BA40AF0FD"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.VisualScripting.DocCodeExamples.dll",
+      "size": 7168,
+      "hash": "4B877EF20169BA21D40A86D1D0B8EABDAF1B164986CD321E48E2FA3B0FCC8579"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.VisualScripting.Flow.dll",
+      "size": 409600,
+      "hash": "D1C571281186416A26FF01479AB098ABA5DB95313067A92EA42FC57D026EF1EF"
+    },
+    {
+      "path": "UnityGame_Data/Managed/Unity.VisualScripting.State.dll",
+      "size": 32256,
+      "hash": "AFC9159ADF5CD06AB8BA3FF733A29DB13E01221CA9733F24D668B5F6494ED229"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.AccessibilityModule.dll",
+      "size": 51120,
+      "hash": "5FE0CBD2577F438F23FE693D7552E563104EA2C1395BA8D82DD723926ACAE7B0"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.AdaptivePerformanceModule.dll",
+      "size": 124840,
+      "hash": "CA471A9BDCEC2DC61DEF7C56CAF7B64DADF4B180871D31D7DF4E4EDD3BB39253"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.AIModule.dll",
+      "size": 77224,
+      "hash": "6FA059ABFAAB5646E208CA655FAF4DDDA7078F85345A7B560481E4DC06823C0A"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.AMDModule.dll",
+      "size": 21936,
+      "hash": "0C0419D0287D1A91D2F0D0BC2886FFC689FE0A1BFEBEFBDA83C45A0CFC72BB9D"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.AndroidJNIModule.dll",
+      "size": 121776,
+      "hash": "C524952E7F8A28AD7F06587F41DB380D5A7BA7501D679802CF6EAA8BE2E5E16A"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.AnimationModule.dll",
+      "size": 225200,
+      "hash": "57BEE9441929AEE22A22E8A9FAEE22F1936A3F89ADBEE7B292C53070C184418F"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.ARModule.dll",
+      "size": 25520,
+      "hash": "4B27527D6D9A8E2FB387CA100FF299D41895B931ECE01E0182EFD99829CD1ED0"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.AssetBundleModule.dll",
+      "size": 41904,
+      "hash": "9292A8D1519D690AB8432A77D09C9BDA50D7EE8A6FF924B604A9291C6E732C37"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.AudioModule.dll",
+      "size": 142760,
+      "hash": "F84B1472A440AE16D203E20217F00F2F1F931A4CAB147DFCDF231BA23DBBA1E9"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.ClothModule.dll",
+      "size": 36272,
+      "hash": "0B2F31FF4A80AE196C4169FAD9331EEAF8299531323388AAA2501060F2BA7ED3"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.ClusterInputModule.dll",
+      "size": 28072,
+      "hash": "FE06F194A17ED7DA295321D2422FBC341CB750EE9FA3CF48D84E470C812FC041"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.ClusterRendererModule.dll",
+      "size": 26536,
+      "hash": "80154809AEB25EE254EC84A5AE5E7FAF4E9D8482582CA0ED5968AE323E5410A2"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.ContentLoadModule.dll",
+      "size": 32688,
+      "hash": "BA38652B3AD59C6EEAA8F30441F87BD721455ADF532E98E7F7B5101C30602506"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.CoreModule.dll",
+      "size": 1984432,
+      "hash": "C7DCC8ECB507AD2422819075F744C2F7D6ED24BE358C1D700A5495A599088FF8"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.CrashReportingModule.dll",
+      "size": 26536,
+      "hash": "84B286D0806B943E5F99CBA72AA6F0817BED290C31B892654DDAC26B13082403"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.DirectorModule.dll",
+      "size": 41904,
+      "hash": "B0C1A232A157F05A95F58DE2B548145654B9C1203FC024266611262E98EDC2AD"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.dll",
+      "size": 197544,
+      "hash": "2D0B9C7225454780EDFF8AFF2FABFEADF7755CD27BC793232498638A22736C90"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.DSPGraphModule.dll",
+      "size": 31664,
+      "hash": "47D8ACA596E9F38AA3093B079A48B485576C86FDE50A0414643892FBDA6882CA"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.GameCenterModule.dll",
+      "size": 46000,
+      "hash": "72D7FBFA8AAEB3870E5335D9A3685845DD818EF5DD293446F20F8DD7D9DFD053"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.GIModule.dll",
+      "size": 24488,
+      "hash": "DB42CE5CB9588255F6E4A7C7AED9E37EEF7D5BA23851EA08C9904FFD871AED00"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.GraphicsStateCollectionSerializerModule.dll",
+      "size": 14248,
+      "hash": "4B41B4532922646E139B95DB837772B67144FE92283A8EF61FDCC0EF2C8BDE24"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.GridModule.dll",
+      "size": 30640,
+      "hash": "26CCD37002C6D3FF804BBEE1273597E813D76261B46A204B13A937899412B7FB"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.HierarchyCoreModule.dll",
+      "size": 109480,
+      "hash": "20E7EB9C32B3A7319A16FA2CBB7FA1F609FAB59F05668168AB714B3FB660D136"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.HierarchyModule.dll",
+      "size": 102320,
+      "hash": "8CA0DF6F739EBBE48FAF7131EF33AB0335F75E0A9BD6FDDF10EE2F931DC7E9E8"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.HotReloadModule.dll",
+      "size": 24496,
+      "hash": "16B9C1B681769C99732532EEF4BB5730891B214BFAECAC23F9E2E33496E638D5"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.IdentifiersModule.dll",
+      "size": 16808,
+      "hash": "729DE2F1C6065AB95A32026A93673A821DB7BE3B58DB373CC2A817D21DC7BFC6"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.ImageConversionModule.dll",
+      "size": 31152,
+      "hash": "74E56289B009C7E0B91D4D090A878C6E81E9AC441D4297CADDE58B5309FB2637"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.IMGUIModule.dll",
+      "size": 214448,
+      "hash": "E0F10F0B4E25788B97DBB72717C5078EE7C2683C1F4F3FCFC4A0119A1ADD8059"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.InputForUIModule.dll",
+      "size": 57776,
+      "hash": "6FF753EA5C2A12D058D75A3B0D715E91C18B83720AD6FFD0FD074E7D09A36D30"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.InputLegacyModule.dll",
+      "size": 45480,
+      "hash": "B002E871CD0D5BE3C209CF6A394C01CAF6582D40FC2D3B6C6D96AE98F106C244"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.InputModule.dll",
+      "size": 28592,
+      "hash": "18F88539FAC7C1BF45ACC5A78B0A67524BFECD7342C31B83071E7E6BDEE1CABD"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.InsightsModule.dll",
+      "size": 14248,
+      "hash": "E6536786D5B0DC8BCC398554EC670DE73182A819FF3FD67F5A85A7F483FCAC22"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.JSONSerializeModule.dll",
+      "size": 27048,
+      "hash": "7DB8D1D97657334A09835C9C55581D9132E405DF9BEE2BA0997AE5AE5F1749EC"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.LocalizationModule.dll",
+      "size": 27056,
+      "hash": "EFF06AC2E87FFF93E5005BE854C6D06A702446666F665884DD21F1C75D64AD53"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.MarshallingModule.dll",
+      "size": 83880,
+      "hash": "70F4FBD1F9F2498A86645BF4726F69241DF2D326039CEA06A04F3E75B49FDD21"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.MultiplayerModule.dll",
+      "size": 17840,
+      "hash": "01B53E3E2BD846587EBFB13BB4187F8262CC74E46E1C6727A7FA6B204E4C6196"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.NVIDIAModule.dll",
+      "size": 40880,
+      "hash": "D7D2CE48E293BC2F5A67ECCB67222B9B800930F6216F13794F1515F03CB2620D"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.ParticleSystemModule.dll",
+      "size": 171944,
+      "hash": "681C482EBF3B6EA8BFB94FB07E85B8F0ABE9EFF4CB7054E7DF9A030C12B0F356"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.PerformanceReportingModule.dll",
+      "size": 25000,
+      "hash": "4AA15450584EB70B0EC5A354B51A6FDCF51D3BF4095AA53AA174A6A4ED38EFF0"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.Physics2DModule.dll",
+      "size": 586672,
+      "hash": "C252CFE2142EBC8DDE58B5B64152221BA35A3F1335181838846778499F1278AA"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.PhysicsBackendPhysXModule.dll",
+      "size": 14248,
+      "hash": "06807B1B499C595C84943273861EA9B6120DB70217C01D90A8B34024E803C1F9"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.PhysicsModule.dll",
+      "size": 183720,
+      "hash": "894F8C085424EC77BC461A6D78E020453D331B0468D106AB63D136DC75ABE348"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.PropertiesModule.dll",
+      "size": 134056,
+      "hash": "D20D3C941738708E4BDF7FD2681AA9E6CF03D0D27C43586F6E5D5A16D615BE7F"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.RenderAs2DModule.dll",
+      "size": 25520,
+      "hash": "8E6F00229937943FDE61CC83F372014D516EBAE0993787851C69057A1EB6E0B6"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll",
+      "size": 24488,
+      "hash": "106080C721564DA7B987BC8F7E81B5DD3D60DCF3616175257C0144C83D00B9BE"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.ScreenCaptureModule.dll",
+      "size": 26544,
+      "hash": "4C667D6D32A60380A1FA2F5D5CAB0BF090006A05FB3BDA963B063E1C7FF9ED1A"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.ShaderRuntimeModule.dll",
+      "size": 25520,
+      "hash": "BDFF8EB6ECC1F673070E3B77F50519266BB7B05630382E2751D3675EAC024965"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.ShaderVariantAnalyticsModule.dll",
+      "size": 24488,
+      "hash": "0A87C2896AED1B2EDE48220E6A9F594817B2CBFA5393E13056FFCEDF2CEEB48A"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.SharedInternalsModule.dll",
+      "size": 38312,
+      "hash": "7368ED2C202BDB6F0B448C7D657446FB3077F7360377A5B7D3ED464A6C66E564"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.SpriteMaskModule.dll",
+      "size": 28584,
+      "hash": "6E98EFBA3BC7A58D62830C94DB76CA5EC4708840470879B97109AFD3E315B761"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.SpriteShapeModule.dll",
+      "size": 32680,
+      "hash": "6922237E7F9D504CF4FA01347B0743ED17DCF78294BBBB4611A0B47600E4AB86"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.StreamingModule.dll",
+      "size": 26024,
+      "hash": "2D57B776CB7E74F874713ECC4853DE0E6C48605B26FEA68423C78C8D8E93CDF3"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.SubstanceModule.dll",
+      "size": 29096,
+      "hash": "957A8EB8DF11A0945C88CC8372113A465642066A66E22D5C2B012F699FF38C78"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.SubsystemsModule.dll",
+      "size": 41896,
+      "hash": "94855B2C070F312B888B92A4F67BA9BE92B8C0DB0F56E232668BD733B01180C5"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.TerrainModule.dll",
+      "size": 134064,
+      "hash": "78CF42D5CF89FD1B7449143BBA7780C32D580C2292FFCAE91711B0091996708A"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.TerrainPhysicsModule.dll",
+      "size": 25520,
+      "hash": "678109BD11AAFE3BBCE87076C3FCC5DC1A794ECE9E3693373D22CD2D7A41C536"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll",
+      "size": 81832,
+      "hash": "AC3E80CDBF4BE816C04994C7DC8090B880BBCEEF488124E2B9090A7D67F1D5FC"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll",
+      "size": 334256,
+      "hash": "202509CBFC8E0E2A2494D111092BAD3FABC52274BDB704B90AB63411FFDB6112"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.TextRenderingModule.dll",
+      "size": 39344,
+      "hash": "F965903427DE78124BEB450984870A12BF171F2A4DBA19183C31AB0A3DB34F08"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.TilemapModule.dll",
+      "size": 58800,
+      "hash": "9819A26B2232629206CF3D433DDEDB4F70BF4EA673F3619391FF160C9EB2C7CE"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.TLSModule.dll",
+      "size": 32176,
+      "hash": "C5FD1DE4364A4E6B69F92A977B3BB5A026AFD523627554488DCEA48C6E514CC7"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UI.dll",
+      "size": 276480,
+      "hash": "C13AED00E84D04C964DE0DC46E0A2EBFE41F324FFE181E9B1F19D7AA8DB06F17"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UIElementsModule.dll",
+      "size": 2452400,
+      "hash": "107D0827C925EF0EBFCB04E91E3659541B19170CC67C5FD1801FF0F3015EEE72"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UIModule.dll",
+      "size": 49576,
+      "hash": "70C34BF9E8583E1F6596260BC732AD62804F37D8737357F542B5390DD384CB37"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UmbraModule.dll",
+      "size": 24496,
+      "hash": "AE9C7F3EEC1E5169D3CF3F1B0C1A3791A4249D51A0CF920BF10E5C06C5FDF835"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll",
+      "size": 35760,
+      "hash": "84E67D6060EF586AC3D72FB8081A444B651B214CF191BD4000725AF00C6FFD8D"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UnityAnalyticsModule.dll",
+      "size": 60848,
+      "hash": "6F36ACE3BE6317A4040C4149A1F425E7FABB68337679468683AFF9BF22679069"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UnityConnectModule.dll",
+      "size": 27560,
+      "hash": "AF8A8B8ECAE05AF2FEE9DA10D39BA0927DADB84BF35496A2E5847A3CA789F7CE"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UnityConsentModule.dll",
+      "size": 16304,
+      "hash": "7432A75D5762FB98166822C5110B9F41B6DEE26D0B39BE915FFC86301393477D"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UnityCurlModule.dll",
+      "size": 26024,
+      "hash": "7773EFF1C627D39593691C07D2EAA24BFF9F7CBB00814B1F062F3B5D69274E31"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll",
+      "size": 28592,
+      "hash": "42259360BDF52536B2A226973139E588181D913C382C72D5DA5177A00E535539"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll",
+      "size": 28592,
+      "hash": "1F38F74CFD1D6799222A1C29CC0A26CA4C0C3E8C4F42BC190259AD3E007E1D66"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UnityWebRequestModule.dll",
+      "size": 70064,
+      "hash": "D4FB3B2F13DCC6FD201510BE2223937B0739C48139C993240C156F1DAD463AB8"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll",
+      "size": 27568,
+      "hash": "CCF540A963B40622313F35ED7A145A3DD59C2DDC160AB4BDBF82CE4FB49D4CAD"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll",
+      "size": 36784,
+      "hash": "4FFD40AFED9CEB3F92A24D79CA85785FB81E6EE52B57213B21171EDB3E7F3EA5"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.VectorGraphicsModule.dll",
+      "size": 252848,
+      "hash": "8202DEC45FDF3B3D9D08423658801718F6ECEAFF7BA89C348E96C1E661426283"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.VehiclesModule.dll",
+      "size": 31664,
+      "hash": "504A06145C529AFBB6544EEF0DB44497F30DE0870A5BF3236E0169757FFE6C11"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.VFXModule.dll",
+      "size": 78256,
+      "hash": "6BACED6ED71EC0A752D27E68410ACD8DC38842703BA7A60CD0704C6AFB53A935"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.VideoModule.dll",
+      "size": 49072,
+      "hash": "2378779E8D8924FBC7A3410761E6CE095242B9994A5E3F5F10D2951D4C6ABF6E"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.VirtualTexturingModule.dll",
+      "size": 42920,
+      "hash": "2039FD49320FF3490155E14C7FC19F3A2244F3AAC80BDA4AFD63CBBD9B464484"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.VRModule.dll",
+      "size": 31664,
+      "hash": "3FBA43BDDB5C237460A5CCEB8AB6A765020AEBE19845929D384208FF06392370"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.WindModule.dll",
+      "size": 26544,
+      "hash": "DF0DFAA0672816B9D6832424DD15F61DB76512248BF557482CCA2EAB6F63E9F5"
+    },
+    {
+      "path": "UnityGame_Data/Managed/UnityEngine.XRModule.dll",
+      "size": 88496,
+      "hash": "2D59FE7AA7E4AD173CC6465D88EF950CA97E1F4E162550E71120681A0B9340F7"
+    },
+    {
+      "path": "UnityGame_Data/Plugins/x86_64/lib_burst_generated.dll",
+      "size": 446464,
+      "hash": "E5332C8B677A8FA775F2802486731B62947B7D3D76EBD6954AA971F3BDC660A6"
+    },
+    {
+      "path": "UnityGame_Data/Plugins/x86_64/libonigwrap.dll",
+      "size": 551336,
+      "hash": "6D539F2AD6E1B58D3C8836B9C3A1D50C97CBD7A6CA0C5DE25D994A7C4B1ECF42"
+    },
+    {
+      "path": "UnityGame_Data/resources.assets",
+      "size": 365624,
+      "hash": "549EA2971B5FFD5C7066D70B452423B29E09DBDDA3628514728F466B082FAE0A"
+    },
+    {
+      "path": "UnityGame_Data/resources.assets.resS",
+      "size": 356784,
+      "hash": "164E7FBE39A196C082676775029119270B43A920710B1A3D3D7FE60A7AF73421"
+    },
+    {
+      "path": "UnityGame_Data/Resources/unity default resources",
+      "size": 5883716,
+      "hash": "32B58BDB9CF090212B46A8CA7436DCDAE89E4EF43E9D55A835233C21D1347734"
+    },
+    {
+      "path": "UnityGame_Data/Resources/unity_builtin_extra",
+      "size": 401752,
+      "hash": "B526444176CE83AF1784F1A075C941EB0439741F43F01CEA32412A52CBB234A9"
+    },
+    {
+      "path": "UnityGame_Data/RuntimeInitializeOnLoads.json",
+      "size": 4487,
+      "hash": "6ACE16EF5F78D9E3BE7A919C45014654FFEC7BD9D0129ADF14CC3B92F1E8B7E7"
+    },
+    {
+      "path": "UnityGame_Data/ScriptingAssemblies.json",
+      "size": 4319,
+      "hash": "BDABBC3C63F9F3328CFDEC2221742A3AFCF2E85697E3D529263BDC19C13CC186"
+    },
+    {
+      "path": "UnityGame_Data/sharedassets0.assets",
+      "size": 667344,
+      "hash": "B5FD979FD618A69935109AF9EFC06CFA97049D475E314CF11C798F4277F87B4D"
+    },
+    {
+      "path": "UnityGame_Data/sharedassets0.assets.resS",
+      "size": 1578336,
+      "hash": "3D24F8F5CE0D2BC256FB90A961EE3EF8682D1BF01B32A374BCF4779F6743258B"
+    },
+    {
+      "path": "UnityGame.exe",
+      "size": 667136,
+      "hash": "48EFAB523AA684C653BD1254A6962D3410127B5C02DC1310F6F16F4810666556"
+    },
+    {
+      "path": "UnityPlayer.dll",
+      "size": 36734888,
+      "hash": "35F489B6A7753D536CE2E7B1BD1F729AFB8B4E70B43CAAA01AF03D1C20F64D6C"
+    }
+  ]
+}
